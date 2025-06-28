@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: minecraft-pvc
+  name: create-astral-pvc
   namespace: minecraft
 spec:
   accessModes:

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: minecraft-server
+  name: create-astral
   namespace: minecraft
 spec:
   replicas: 1
@@ -49,4 +49,4 @@ spec:
       volumes:
       - name: minecraft-data
         persistentVolumeClaim:
-          claimName: minecraft-pvc
+          claimName: create-astral-pvc
