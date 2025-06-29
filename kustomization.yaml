@@ -4,9 +4,5 @@ kind: Kustomization
 resources:
   # ArgoCD Application (self-managed)
   - argocd.yaml
-  # Minecraft server resources
-  - namespace.yaml
-  - persistent-volume.yaml
-  - persistent-volume-claim.yaml
-  - deployment.yaml
-  - service.yaml
+  # Minecraft servers
+  - overlays/create-astral

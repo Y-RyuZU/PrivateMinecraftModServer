@@ -1,20 +1,18 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: create-astral
+  name: minecraft-server
   namespace: minecraft
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
-    app: minecraft
+    app: minecraft-server
   ports:
   - name: minecraft
     port: 25565
     targetPort: 25565
-    nodePort: 30565
     protocol: TCP
   - name: rcon
     port: 25575
     targetPort: 25575
-    nodePort: 30575
     protocol: TCP
