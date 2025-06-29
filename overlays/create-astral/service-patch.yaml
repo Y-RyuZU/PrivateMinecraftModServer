@@ -3,11 +3,15 @@ kind: Service
 metadata:
   name: minecraft-server
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: create-astral-minecraft-server
   ports:
   - name: minecraft
-    nodePort: 30565
+    port: 25565
+    targetPort: 25565
+    protocol: TCP
   - name: rcon
-    nodePort: 30575
+    port: 25575
+    targetPort: 25575
+    protocol: TCP
