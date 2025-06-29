@@ -41,11 +41,11 @@ spec:
           mountPath: /data
         resources:
           requests:
-            memory: "4Gi"
-            cpu: "2"
+            memory: "12Gi"
+            cpu: "6"
           limits:
-            memory: "6Gi"
-            cpu: "4"
+            memory: "14Gi"
+            cpu: "8"
       volumes:
       - name: minecraft-data
         persistentVolumeClaim:
