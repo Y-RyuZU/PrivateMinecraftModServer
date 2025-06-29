@@ -88,6 +88,26 @@ Multi-server Minecraft infrastructure using Kustomize overlays.
   - Service: LoadBalancer (direct WAN access)
   - RCON: Enabled (password: rcon123)
 
+## Importing Existing Worlds
+
+### Method 1: Direct Copy (Recommended)
+1. SSH to the node: `ssh private-minecraft`
+2. Copy world to PV: `sudo cp -r /path/to/world /mnt/create-astral-minecraft-data/`
+3. Fix ownership: `sudo chown -R 1000:1000 /mnt/create-astral-minecraft-data`
+
+### Method 2: Init Container
+- Uncomment the init container in `deployment-patch.yaml`
+- Provide URL to your world backup zip file
+- Container will download and extract on first start
+
+### Method 3: Environment Variable
+- Use `WORLD_URL` environment variable
+- itzg/minecraft-server will download and extract automatically
+
+### Method 4: ConfigMap (Small worlds only)
+- Use `world-configmap.yaml` for worlds < 1MB per file
+- Base64 encode world files and add to ConfigMap
+
 ## Deployment
 
 The servers are automatically deployed via ArgoCD from this repository.
