@@ -1,0 +1,28 @@
+# Sample modded Minecraft server configuration
+# Copy this overlay and customize for your modpack
+#
+# apiVersion: kustomize.config.k8s.io/v1beta1
+# kind: Kustomization
+# 
+# namePrefix: sample-mod-
+# commonLabels:
+#   app.kubernetes.io/instance: sample-mod
+#   minecraft-type: modded
+# 
+# resources:
+#   - ../../base
+#   - persistent-volume.yaml
+# 
+# patches:
+#   - path: deployment-patch.yaml
+#     target:
+#       kind: Deployment
+#       name: minecraft-server
+#   - path: service-patch.yaml
+#     target:
+#       kind: Service
+#       name: minecraft-server
+#   - path: pvc-patch.yaml
+#     target:
+#       kind: PersistentVolumeClaim
+#       name: minecraft-pvc

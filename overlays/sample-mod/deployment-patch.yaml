@@ -13,18 +13,17 @@ spec:
     spec:
       containers:
       - name: minecraft
-        image: ghcr.io/claraphyll/create-astral:latest
         env:
-        - name: EULA
-          value: "TRUE"
+        - name: TYPE
+          value: "FORGE"
+        - name: VERSION
+          value: "1.20.1"
         - name: MEMORY
-          value: "12G"
-        - name: USE_AIKAR_FLAGS
-          value: "true"
-        - name: RCON_ENABLED
-          value: "true"
-        - name: RCON_PASSWORD
-          value: "rcon123"  # Change this password
+          value: "4G"
+        - name: FORGE_VERSION
+          value: "47.2.0"
+        - name: MODPACK_URL
+          value: "https://example.com/create-astral-modpack.zip"  # Replace with actual modpack URL
         resources:
           requests:
             memory: "12Gi"

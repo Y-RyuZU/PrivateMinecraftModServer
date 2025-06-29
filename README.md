@@ -12,7 +12,13 @@ Multi-server Minecraft infrastructure using Kustomize overlays.
 │   ├── persistent-volume-claim.yaml
 │   └── kustomization.yaml
 ├── overlays/
-│   └── create-astral/       # Create Astral modpack server
+│   ├── create-astral/       # Create Astral modpack server
+│   │   ├── kustomization.yaml
+│   │   ├── deployment-patch.yaml
+│   │   ├── service-patch.yaml
+│   │   ├── pvc-patch.yaml
+│   │   └── persistent-volume.yaml
+│   └── sample-mod/          # Sample modded server template (commented)
 │       ├── kustomization.yaml
 │       ├── deployment-patch.yaml
 │       ├── service-patch.yaml
@@ -25,6 +31,14 @@ Multi-server Minecraft infrastructure using Kustomize overlays.
 
 ## Adding a New Minecraft Server
 
+**Option 1: Using the sample template**
+1. Copy the sample-mod overlay:
+   ```bash
+   cp -r overlays/sample-mod overlays/new-server
+   ```
+2. Uncomment and modify the kustomization.yaml in the new overlay
+
+**Option 2: Create from scratch**
 1. Create a new overlay directory:
    ```bash
    mkdir overlays/new-server
@@ -67,10 +81,12 @@ Multi-server Minecraft infrastructure using Kustomize overlays.
 
 ## Current Servers
 
-- **create-astral**: Create Astral modpack (Forge 1.20.1)
+- **create-astral**: Create Astral modpack using pre-built container
+  - Image: `ghcr.io/claraphyll/create-astral:latest`
   - Memory: 14Gi / 8 CPU
   - Storage: 50Gi
-  - Ports: 30565 (game), 30575 (RCON)
+  - Service: LoadBalancer (direct WAN access)
+  - RCON: Enabled (password: rcon123)
 
 ## Deployment
 
