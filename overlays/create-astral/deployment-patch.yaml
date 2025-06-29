@@ -11,25 +11,9 @@ spec:
       labels:
         app: create-astral-minecraft-server
     spec:
-      # Uncomment and modify this init container to download/extract world data
-      # initContainers:
-      # - name: world-downloader
-      #   image: busybox:latest
-      #   command: ['sh', '-c']
-      #   args:
-      #   - |
-      #     if [ ! -d "/data/world" ]; then
-      #       echo "Downloading world backup..."
-      #       wget -O /tmp/world.zip "https://your-server.com/world-backup.zip"
-      #       cd /data && unzip /tmp/world.zip
-      #       chown -R 1000:1000 /data
-      #     fi
-      #   volumeMounts:
-      #   - name: minecraft-data
-      #     mountPath: /data
       containers:
       - name: minecraft
-        image: ghcr.io/claraphyll/create-astral:v2.1.3
+        image: ghcr.io/claraphyll/create-astral:latest
         env:
         - name: EULA
           value: "TRUE"
@@ -41,9 +25,6 @@ spec:
           value: "true"
         - name: RCON_PASSWORD
           value: "rcon123"  # Change this password
-        # Uncomment to download world from URL on first start
-        # - name: WORLD_URL
-        #   value: "https://your-server.com/world-backup.zip"
         resources:
           requests:
             memory: "14Gi"
