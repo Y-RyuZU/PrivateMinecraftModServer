@@ -22,7 +22,7 @@ spec:
         - name: VERSION
           value: "1.20.1"
         - name: FORGE_VERSION
-          value: "47.2.0"
+          value: "47.4.0"
         - name: MEMORY
           value: "12G"
         - name: USE_AIKAR_FLAGS
@@ -31,10 +31,6 @@ spec:
           value: "true"
         - name: RCON_PASSWORD
           value: "rcon123"
-        - name: MODPACK
-          value: "https://edge.forgecdn.net/files/4835/191/ATM9-0.2.60.zip"
-        - name: REMOVE_OLD_MODS
-          value: "true"
         resources:
           requests:
             memory: "14Gi"
