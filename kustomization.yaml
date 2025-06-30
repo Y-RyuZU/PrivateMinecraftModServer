@@ -5,4 +5,4 @@ resources:
   # ArgoCD Application (self-managed)
   - argocd.yaml
   # Minecraft servers
-  - overlays/create-astral
+  - overlays/atm9
