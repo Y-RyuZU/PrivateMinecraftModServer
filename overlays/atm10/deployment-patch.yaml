@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minecraft-server
+spec:
+  selector:
+    matchLabels:
+      app: atm10-minecraft-server
+  template:
+    metadata:
+      labels:
+        app: atm10-minecraft-server
+    spec:
+      containers:
+      - name: minecraft
+        image: itzg/minecraft-server:latest
+        env:
+        - name: EULA
+          value: "TRUE"
+        - name: TYPE
+          value: "NEOFORGE"
+        - name: VERSION
+          value: "1.21.1"
+        - name: NEOFORGE_VERSION
+          value: "21.1.214"
+        - name: MEMORY
+          value: "12G"
+        - name: RCON_ENABLED
+          value: "true"
+        - name: RCON_PASSWORD
+          value: "rcon123"
+        resources:
+          requests:
+            memory: "14Gi"
+            cpu: "6"
+          limits:
+            memory: "16Gi"
+            cpu: "8"
