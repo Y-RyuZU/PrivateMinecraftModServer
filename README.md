@@ -1,6 +1,6 @@
 # Private Minecraft Mod Server
 
-Multi-server Minecraft infrastructure using Kustomize overlays.
+Minecraft infrastructure using Kustomize overlays and ArgoCD.
 
 ## Structure
 
@@ -12,13 +12,10 @@ Multi-server Minecraft infrastructure using Kustomize overlays.
 │   ├── persistent-volume-claim.yaml
 │   └── kustomization.yaml
 ├── overlays/
-│   ├── create-astral/       # Create Astral modpack server
-│   │   ├── kustomization.yaml
-│   │   ├── deployment-patch.yaml
-│   │   ├── service-patch.yaml
-│   │   ├── pvc-patch.yaml
-│   │   └── persistent-volume.yaml
-│   └── sample-mod/          # Sample modded server template (commented)
+│   ├── atm10sky/             # ATM10: To the Sky + server-compatible addons
+│   ├── atm10/                # Previous ATM10 overlay (inactive)
+│   ├── atm9/                 # Previous ATM9 overlay (inactive)
+│   └── sample-mod/           # Sample modded server template
 │       ├── kustomization.yaml
 │       ├── deployment-patch.yaml
 │       ├── service-patch.yaml
@@ -29,7 +26,7 @@ Multi-server Minecraft infrastructure using Kustomize overlays.
 
 ```
 
-## Adding a New Minecraft Server
+## Legacy overlay template
 
 **Option 1: Using the sample template**
 1. Copy the sample-mod overlay:
@@ -79,34 +76,18 @@ Multi-server Minecraft infrastructure using Kustomize overlays.
      - overlays/new-server  # Add this line
    ```
 
-## Current Servers
+## Current Server
 
-- **create-astral**: Create Astral modpack using pre-built container
-  - Image: `ghcr.io/claraphyll/create-astral:latest`
-  - Memory: 14Gi / 8 CPU
-  - Storage: 50Gi
-  - Service: LoadBalancer (direct WAN access)
-  - RCON: Enabled (password: rcon123)
+- `atm10sky`: Latest ATM10: To the Sky from CurseForge
+- Minecraft 1.21.1 / NeoForge selected by the modpack
+- Additional server-compatible mods and required libraries are declared in `overlays/atm10sky/deployment-patch.yaml`
+- 12G heap, 14Gi request, 16Gi limit
+- 100Gi local PV on the `private-minecraft` Kubernetes node
+- NodePorts: 32568 (Minecraft), 31027 (RCON)
 
-## Importing Existing Worlds
+## Previous World
 
-### Method 1: Direct Copy (Recommended)
-1. SSH to the node: `ssh private-minecraft`
-2. Copy world to PV: `sudo cp -r /path/to/world /mnt/create-astral-minecraft-data/`
-3. Fix ownership: `sudo chown -R 1000:1000 /mnt/create-astral-minecraft-data`
-
-### Method 2: Init Container
-- Uncomment the init container in `deployment-patch.yaml`
-- Provide URL to your world backup zip file
-- Container will download and extract on first start
-
-### Method 3: Environment Variable
-- Use `WORLD_URL` environment variable
-- itzg/minecraft-server will download and extract automatically
-
-### Method 4: ConfigMap (Small worlds only)
-- Use `world-configmap.yaml` for worlds < 1MB per file
-- Base64 encode world files and add to ConfigMap
+The previous ATM10 world was archived on `minecraft-node` before its PV was cleaned. The archive is not managed by Git.
 
 ## Deployment
 
