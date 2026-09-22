@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minecraft-server
+spec:
+  selector:
+    matchLabels:
+      app: atm10sky-minecraft-server
+  template:
+    metadata:
+      labels:
+        app: atm10sky-minecraft-server
+    spec:
+      containers:
+        - name: minecraft
+          image: itzg/minecraft-server:latest
+          env:
+            - name: TYPE
+              value: AUTO_CURSEFORGE
+            - name: VERSION
+              value: "1.21.1"
+            - name: CF_SLUG
+              value: all-the-mods-10-sky
+            - name: CURSEFORGE_FILES
+              value: |
+                slashblade-resharped
+                sjap
+                more-slashblade-ex-enchantment-effects
+                true-power
+                tlm-true-power
+                advanced-loot-info
+                mrqx-s-slashblade-core
+                touhou-little-maid
+                advanced-core-info
+            - name: MEMORY
+              value: 12G
+            - name: RCON_ENABLED
+              value: "true"
+            - name: RCON_PASSWORD
+              value: rcon123
+          resources:
+            requests:
+              memory: 14Gi
+              cpu: "6"
+            limits:
+              memory: 16Gi
+              cpu: "8"

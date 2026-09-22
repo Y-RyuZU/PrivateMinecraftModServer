@@ -5,5 +5,4 @@ resources:
   # ArgoCD Application (self-managed)
   - argocd.yaml
   # Minecraft servers
-  - overlays/atm10
-  # - overlays/atm9  # Disabled
+  - overlays/atm10sky
