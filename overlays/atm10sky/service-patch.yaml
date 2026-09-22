@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: minecraft-server
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: atm10sky-minecraft-server
   ports:
