@@ -32,6 +32,10 @@ spec:
                 mrqx-s-slashblade-core
                 touhou-little-maid
                 advanced-core-info
+            # YSM is distributed from Modrinth rather than CurseForge.
+            # Pin to the same NeoForge 1.21.1 build used by the Sky client.
+            - name: MODRINTH_PROJECTS
+              value: yes-steve-model:HZWaR0LY
             - name: MEMORY
               value: 12G
             - name: RCON_ENABLED
