@@ -51,7 +51,7 @@ spec:
               # The node currently hosts burstable GitHub Actions runners.
               # Keep the 16Gi limit/12G JVM setting, but leave enough
               # schedulable headroom for the server to be placed.
-              memory: 8Gi
+              memory: 6Gi
               cpu: "6"
             limits:
               memory: 16Gi
