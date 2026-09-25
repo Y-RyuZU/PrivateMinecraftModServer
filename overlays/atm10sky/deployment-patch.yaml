@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: minecraft-server
 spec:
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: atm10sky-minecraft-server
